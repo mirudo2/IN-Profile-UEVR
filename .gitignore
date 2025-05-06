@@ -6,6 +6,11 @@
 sdkdump/
 cvardump.json
 log.txt
+user_script.txt
+imgui.ini
+injector_config.txt
+cvars_standard.txt
+cameras.txt
 
 # User-specific files
 *.rsuser
