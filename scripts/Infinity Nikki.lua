@@ -46,20 +46,6 @@
         GAMEPAD_A = gamepad.wButtons & XINPUT_GAMEPAD_A ~= 0
         GAMEPAD_B = gamepad.wButtons & XINPUT_GAMEPAD_B ~= 0
 
-        if not RIGHT_SHOULDER then
-            local max_speed = 16000
-            local thumb_x = gamepad.sThumbLX
-            local thumb_y = gamepad.sThumbLY
-            local magnitude = math.sqrt(thumb_x ^ 2 + thumb_y ^ 2)
-            if magnitude > max_speed then
-                local ratio = max_speed / magnitude
-                thumb_x = thumb_x * ratio
-                thumb_y = thumb_y * ratio
-            end
-            gamepad.sThumbLX = thumb_x
-            gamepad.sThumbLY = thumb_y
-        end
-
         if LEFT_THUMB and RIGHT_THUMB then
             --state.Gamepad.wButtons = state.Gamepad.wButtons & ~XINPUT_GAMEPAD_LEFT_THUMB
             --state.Gamepad.wButtons = state.Gamepad.wButtons & ~XINPUT_GAMEPAD_RIGHT_THUMB
@@ -108,6 +94,20 @@
 
         leftTrigger = gamepad.bLeftTrigger ~= 0
         rightTrigger = gamepad.bRightTrigger ~= 0
+		
+        if rightTrigger then
+            local max_speed = 16000
+            local thumb_x = gamepad.sThumbLX
+            local thumb_y = gamepad.sThumbLY
+            local magnitude = math.sqrt(thumb_x ^ 2 + thumb_y ^ 2)
+            if magnitude > max_speed then
+                local ratio = max_speed / magnitude
+                thumb_x = thumb_x * ratio
+                thumb_y = thumb_y * ratio
+            end
+            gamepad.sThumbLX = thumb_x
+            gamepad.sThumbLY = thumb_y
+        end
 
         if LEFT_THUMB and rightTrigger then
             zoom = zoom + 3
